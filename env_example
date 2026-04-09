@@ -1,4 +1,4 @@
 PORT=3000
-DB_URI=mongodb://127.0.0.1:27017/learningSystem
-DB_NAME=learningSystem
+DB_URI=mongodb://127.0.0.1:27017/financeSystem
+DB_NAME=financeSystem
 JWT_EXPIRY=30

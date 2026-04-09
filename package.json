@@ -1,7 +1,7 @@
 {
-  "name": "learningBooking",
+  "name": "financeSystem",
   "version": "1.0.0",
-  "description": "learning system",
+  "description": "financial system",
   "main": "index.js",
   "scripts": {
     "dev:nd": "nodemon main.js",

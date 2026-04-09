@@ -20,7 +20,7 @@ const { validationThrowsError } = validator,
     retrieveUserByPhone,
     updateUser,
     retrieveUser,
-retrieveAllUsers
+    retrieveAllUsers
   } = userService,
   { generateToken } = helpers;
 
@@ -30,7 +30,7 @@ retrieveAllUsers
 const loginUser = async (req, res) => {
   try {
     // const { email, password } = req.body;
-const { error, value } = loginSchema.validate(req.body);
+    const { error, value } = loginSchema.validate(req.body);
 
     if (error) {
       return send400(res, {
@@ -98,16 +98,16 @@ const { error, value } = loginSchema.validate(req.body);
 
 const createNewUser = async (req, res) => {
   try {
-const { error, value } = createUserSchema.validate(req.body);
+    const { error, value } = createUserSchema.validate(req.body);
 
-if (error) {
-  return send400(res, {
-    status: false,
-    message: error.details[0].message,
-  });
-}
+    if (error) {
+      return send400(res, {
+        status: false,
+        message: error.details[0].message,
+      });
+    }
 
-const { name, email, phoneNo, password, role } = value;
+    const { name, email, phoneNo, password, role } = value;
     const existingEmail = await retrieveUserByEmail(email);
     if (existingEmail) {
       return send403(res, { message: "Email already exists" });
@@ -149,12 +149,12 @@ const getUsers = async (req, res) => {
 
     const { error, value } = getUsersQuerySchema.validate(req.query);
 
-if (error) {
-  return send400(res, {
-    status: false,
-    message: error.details[0].message,
-  });
-}
+    if (error) {
+      return send400(res, {
+        status: false,
+        message: error.details[0].message,
+      });
+    }
     const {
       page = 1,
       limit = 10,
@@ -247,14 +247,14 @@ const updateUserById = async (req, res) => {
 
     const { error, value } = updateUserSchema.validate(req.body);
 
-if (error) {
-  return send400(res, {
-    status: false,
-    message: error.details[0].message,
-  });
-}
+    if (error) {
+      return send400(res, {
+        status: false,
+        message: error.details[0].message,
+      });
+    }
 
-const updates = value;
+    const updates = value;
 
     if (updates.password) {
       updates.password = await bcrypt.hash(updates.password, 10);
@@ -278,16 +278,16 @@ const updates = value;
 
 const changeUserStatus = async (req, res) => {
   try {
-const { error, value } = statusSchema.validate(req.body);
+    const { error, value } = statusSchema.validate(req.body);
 
-if (error) {
-  return send400(res, {
-    status: false,
-    message: error.details[0].message,
-  });
-}
+    if (error) {
+      return send400(res, {
+        status: false,
+        message: error.details[0].message,
+      });
+    }
 
-const { status } = value;
+    const { status } = value;
 
     const user = await updateUser(
       { _id: req.params.id },
