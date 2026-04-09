@@ -1,0 +1,1760 @@
+{
+	"info": {
+		"_postman_id": "354c6c7a-727e-4bc0-9a07-07d576bfc308",
+		"name": "Finance Backend APIs",
+		"description": "User & Auth APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30795421"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"admin@system.com\",\n  \"password\": \"Admin@123\"\n}\n\n// {\n//   \"email\": \"shobhit@gmail.com\",\n//   \"password\": \"Shobhit@123\"\n// }\n\n// {\n//   \"email\": \"sumit@gmail.com\",\n//   \"password\": \"Sumit@123\"\n// }\n"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"admin@system.com\",\n  \"password\": \"Admin@123\"\n}\n\n// {\n//   \"email\": \"shobhit@gmail.com\",\n//   \"password\": \"Shobhit@123\"\n// }\n\n// {\n//   \"email\": \"sumit@gmail.com\",\n//   \"password\": \"Sumit@123\"\n// }\n"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/auth/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Policy",
+									"value": "100;w=900"
+								},
+								{
+									"key": "RateLimit",
+									"value": "limit=100, remaining=96, reset=873"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2436"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"984-LwnQC3VUGNOmQvV0AK97agMy5LU\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Apr 2026 10:22:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"message\": \"Login successful\",\n    \"data\": {\n        \"user\": {\n            \"_id\": \"69d76396e65c3c5105b6d19f\",\n            \"name\": \"Admin\",\n            \"email\": \"admin@system.com\",\n            \"phoneNo\": \"9999999999\",\n            \"role\": \"admin\",\n            \"status\": \"active\",\n            \"loginToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBcHBTcSIsInN1YiI6eyJfaWQiOiI2OWQ3NjM5NmU2NWMzYzUxMDViNmQxOWYiLCJuYW1lIjoiQWRtaW4iLCJlbWFpbCI6ImFkbWluQHN5c3RlbS5jb20iLCJwaG9uZU5vIjoiOTk5OTk5OTk5OSIsInJvbGUiOiJhZG1pbiIsInN0YXR1cyI6ImFjdGl2ZSIsInBhc3N3b3JkIjoiJDJiJDEwJEt4UEh3RU5DNVQ0L25CSHZ1Tnc5NWVmZGFhSUhwdmpjaEJZNFNPenRtTnNLdlJIdWNUVVRtIiwibG9naW5Ub2tlbiI6bnVsbCwibG9naW5UaW1lIjpudWxsLCJpc0RlbGV0ZWQiOmZhbHNlLCJjcmVhdGVkQXQiOiIyMDI2LTA0LTA5VDA4OjMwOjE0LjI0M1oiLCJ1cGRhdGVkQXQiOiIyMDI2LTA0LTA5VDA4OjMwOjE0LjI0M1oifSwiaWF0IjoxNzc1NzI2MjQ5NDczLCJleHAiOjE3NzgzMTgyNDk0NzN9.tWqtj6YIsGNC0JTHrGToV6eG45-avkErdl8AWjf66_0\",\n            \"loginTime\": \"2026-04-09T09:17:29.480Z\",\n            \"isDeleted\": false,\n            \"createdAt\": \"2026-04-09T08:30:14.243Z\",\n            \"updatedAt\": \"2026-04-09T09:17:29.482Z\"\n        },\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBcHBTcSIsInN1YiI6eyJfaWQiOiI2OWQ3NjM5NmU2NWMzYzUxMDViNmQxOWYiLCJuYW1lIjoiQWRtaW4iLCJlbWFpbCI6ImFkbWluQHN5c3RlbS5jb20iLCJwaG9uZU5vIjoiOTk5OTk5OTk5OSIsInJvbGUiOiJhZG1pbiIsInN0YXR1cyI6ImFjdGl2ZSIsInBhc3N3b3JkIjoiJDJiJDEwJEt4UEh3RU5DNVQ0L25CSHZ1Tnc5NWVmZGFhSUhwdmpjaEJZNFNPenRtTnNLdlJIdWNUVVRtIiwibG9naW5Ub2tlbiI6ImV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUpwYzNNaU9pSkJjSEJUY1NJc0luTjFZaUk2ZXlKZmFXUWlPaUkyT1dRM05qTTVObVUyTldNell6VXhNRFZpTm1ReE9XWWlMQ0p1WVcxbElqb2lRV1J0YVc0aUxDSmxiV0ZwYkNJNkltRmtiV2x1UUhONWMzUmxiUzVqYjIwaUxDSndhRzl1WlU1dklqb2lPVGs1T1RrNU9UazVPU0lzSW5KdmJHVWlPaUpoWkcxcGJpSXNJbk4wWVhSMWN5STZJbUZqZEdsMlpTSXNJbkJoYzNOM2IzSmtJam9pSkRKaUpERXdKRXQ0VUVoM1JVNUROVlEwTDI1Q1NIWjFUbmM1TldWbVpHRmhTVWh3ZG1wamFFSlpORk5QZW5SdFRuTkxkbEpJZFdOVVZWUnRJaXdpYkc5bmFXNVViMnRsYmlJNmJuVnNiQ3dpYkc5bmFXNVVhVzFsSWpwdWRXeHNMQ0pwYzBSbGJHVjBaV1FpT21aaGJITmxMQ0pqY21WaGRHVmtRWFFpT2lJeU1ESTJMVEEwTFRBNVZEQTRPak13T2pFMExqSTBNMW9pTENKMWNHUmhkR1ZrUVhRaU9pSXlNREkyTFRBMExUQTVWREE0T2pNd09qRTBMakkwTTFvaWZTd2lhV0YwSWpveE56YzFOekkyTWpRNU5EY3pMQ0psZUhBaU9qRTNOemd6TVRneU5EazBOek45LnRXcXRqNllJc0dOQzBKVEhyR1RvVjZlRzQ1LWF2a0VyZGw4QVdqZjY2XzAiLCJsb2dpblRpbWUiOiIyMDI2LTA0LTA5VDA5OjE3OjI5LjQ4MFoiLCJpc0RlbGV0ZWQiOmZhbHNlLCJjcmVhdGVkQXQiOiIyMDI2LTA0LTA5VDA4OjMwOjE0LjI0M1oiLCJ1cGRhdGVkQXQiOiIyMDI2LTA0LTA5VDA5OjE3OjI5LjQ4MloifSwiaWF0IjoxNzc1NzMwMTIyNDgxLCJleHAiOjE3NzgzMjIxMjI0ODF9.QCMcXAiUEy4qFI6_DEcMVwmdIx6NynoFe5L-4jH4oPI\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User APIs",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"shobhit singh\",\n  \"email\": \"shobhitsinghpimr1921@gmail.com\",\n  \"phoneNo\": \"9131681445\",\n  \"password\": \"Shobhit@123\",\n  \"role\": \"analyst\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create User",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"shobhit singh\",\n  \"email\": \"shobhitsinghpimr1921@gmail.com\",\n  \"phoneNo\": \"9131681445\",\n  \"password\": \"Shobhit@123\",\n  \"role\": \"analyst\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/create",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"create"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Policy",
+									"value": "100;w=900"
+								},
+								{
+									"key": "RateLimit",
+									"value": "limit=100, remaining=92, reset=604"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "359"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"167-vqAPDTlEs2ytF+pXhhs0ovj+8sI\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Apr 2026 13:13:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"message\": \"User created successfully\",\n    \"data\": {\n        \"name\": \"shobhit singh\",\n        \"email\": \"shobhitsinghpimr1921@gmail.com\",\n        \"phoneNo\": \"9131681445\",\n        \"role\": \"analyst\",\n        \"status\": \"active\",\n        \"loginToken\": null,\n        \"loginTime\": null,\n        \"isDeleted\": false,\n        \"_id\": \"69d7a613fd2d12c8f8f1fc30\",\n        \"createdAt\": \"2026-04-09T13:13:55.458Z\",\n        \"updatedAt\": \"2026-04-09T13:13:55.458Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/user/all?startDate=2026-04-01&endDate=2026-04-10&role=viewer,analyst",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"all"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2026-04-01"
+								},
+								{
+									"key": "endDate",
+									"value": "2026-04-10"
+								},
+								{
+									"key": "role",
+									"value": "viewer,analyst"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/user/all?startDate=2026-04-01&endDate=2026-04-10&role=viewer,analyst",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"all"
+									],
+									"query": [
+										{
+											"key": "startDate",
+											"value": "2026-04-01"
+										},
+										{
+											"key": "endDate",
+											"value": "2026-04-10"
+										},
+										{
+											"key": "role",
+											"value": "viewer,analyst"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Policy",
+									"value": "100;w=900"
+								},
+								{
+									"key": "RateLimit",
+									"value": "limit=100, remaining=91, reset=579"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "816"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"330-IUebA9l1dEnYIdN4+3JlZ7Lm/7g\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Apr 2026 13:14:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"data\": [\n        {\n            \"_id\": \"69d7a613fd2d12c8f8f1fc30\",\n            \"name\": \"shobhit singh\",\n            \"email\": \"shobhitsinghpimr1921@gmail.com\",\n            \"phoneNo\": \"9131681445\",\n            \"role\": \"analyst\",\n            \"status\": \"active\",\n            \"createdAt\": \"2026-04-09T13:13:55.458Z\"\n        },\n        {\n            \"_id\": \"69d77fcca5a1d5fc985e53b2\",\n            \"name\": \"Test User\",\n            \"email\": \"mohit@gmail.com\",\n            \"phoneNo\": \"8871234566\",\n            \"role\": \"viewer\",\n            \"status\": \"active\",\n            \"createdAt\": \"2026-04-09T10:30:36.420Z\"\n        },\n        {\n            \"_id\": \"69d77777c90023e4824b225f\",\n            \"name\": \"Test User\",\n            \"email\": \"sumit@gmail.com\",\n            \"phoneNo\": \"8871234563\",\n            \"role\": \"viewer\",\n            \"status\": \"active\",\n            \"createdAt\": \"2026-04-09T09:55:03.987Z\"\n        },\n        {\n            \"_id\": \"69d7775cc90023e4824b225b\",\n            \"name\": \"Test User\",\n            \"email\": \"shobhit@gmail.com\",\n            \"phoneNo\": \"7770934818\",\n            \"role\": \"analyst\",\n            \"status\": \"active\",\n            \"createdAt\": \"2026-04-09T09:54:36.472Z\"\n        }\n    ],\n    \"meta\": {\n        \"total\": 4,\n        \"page\": 1,\n        \"limit\": 10,\n        \"totalPages\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Shobhit\",\n  \"role\": \"viewer\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/update/69d770a180eaabf204d163b9",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"update",
+								"69d770a180eaabf204d163b9"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update User",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Shobhit\",\n  \"role\": \"viewer\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/update/69d770a180eaabf204d163b9",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"update",
+										"69d770a180eaabf204d163b9"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Policy",
+									"value": "100;w=900"
+								},
+								{
+									"key": "RateLimit",
+									"value": "limit=100, remaining=97, reset=883"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3f-p5/4pk0PPayYDp8g34CrazqeUuY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Apr 2026 10:36:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"message\": \"User updated\",\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Change User Status",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"active\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/status/update/69d770a180eaabf204d163b9",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"status",
+								"update",
+								"69d770a180eaabf204d163b9"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Change User Status",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"status\": \"active\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/status/update/69d770a180eaabf204d163b9",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"status",
+										"update",
+										"69d770a180eaabf204d163b9"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Policy",
+									"value": "100;w=900"
+								},
+								{
+									"key": "RateLimit",
+									"value": "limit=100, remaining=98, reset=891"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "399"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"18f-jNZjCJECvxdRHVp+LbmCASnu1Dg\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Apr 2026 10:36:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"message\": \"User active\",\n    \"data\": {\n        \"_id\": \"69d770a180eaabf204d163b9\",\n        \"name\": \"Shobhit\",\n        \"email\": \"testuser@gmail.com\",\n        \"phoneNo\": \"9876543210\",\n        \"role\": \"viewer\",\n        \"status\": \"active\",\n        \"password\": \"$2b$10$tDo7M3jfITKGZH.LFZLiHOYsrNyjqv1/yHRjZS.WEmlqyHzU3Op2.\",\n        \"loginToken\": null,\n        \"loginTime\": null,\n        \"isDeleted\": true,\n        \"createdAt\": \"2026-04-09T09:25:53.951Z\",\n        \"updatedAt\": \"2026-04-09T10:36:36.454Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/user/delete/69d770a180eaabf204d163b9",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"delete",
+								"69d770a180eaabf204d163b9"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete User",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/user/delete/69d770a180eaabf204d163b9",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"delete",
+										"69d770a180eaabf204d163b9"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Policy",
+									"value": "100;w=900"
+								},
+								{
+									"key": "RateLimit",
+									"value": "limit=100, remaining=96, reset=876"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33-AlEXPuCHlTXEqdhR3d7aE9Ywa90\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Apr 2026 10:36:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"message\": \"User deleted\"\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBcHBTcSIsInN1YiI6eyJfaWQiOiI2OWQ3NjM5NmU2NWMzYzUxMDViNmQxOWYiLCJuYW1lIjoiQWRtaW4iLCJlbWFpbCI6ImFkbWluQHN5c3RlbS5jb20iLCJwaG9uZU5vIjoiOTk5OTk5OTk5OSIsInJvbGUiOiJhZG1pbiIsInN0YXR1cyI6ImFjdGl2ZSIsInBhc3N3b3JkIjoiJDJiJDEwJEt4UEh3RU5DNVQ0L25CSHZ1Tnc5NWVmZGFhSUhwdmpjaEJZNFNPenRtTnNLdlJIdWNUVVRtIiwibG9naW5Ub2tlbiI6bnVsbCwibG9naW5UaW1lIjpudWxsLCJpc0RlbGV0ZWQiOmZhbHNlLCJjcmVhdGVkQXQiOiIyMDI2LTA0LTA5VDA4OjMwOjE0LjI0M1oiLCJ1cGRhdGVkQXQiOiIyMDI2LTA0LTA5VDA4OjMwOjE0LjI0M1oifSwiaWF0IjoxNzc1NzI2MjQ5NDczLCJleHAiOjE3NzgzMTgyNDk0NzN9.tWqtj6YIsGNC0JTHrGToV6eG45-avkErdl8AWjf66_0",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Dashboard APIs",
+			"item": [
+				{
+					"name": "Summary",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/dashboard/summary?startDate=01/04/2026&endDate=10/04/2026",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"dashboard",
+								"summary"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "01/04/2026"
+								},
+								{
+									"key": "endDate",
+									"value": "10/04/2026"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Summary",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/dashboard/summary?startDate=01/04/2026&endDate=10/04/2026",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"dashboard",
+										"summary"
+									],
+									"query": [
+										{
+											"key": "startDate",
+											"value": "01/04/2026"
+										},
+										{
+											"key": "endDate",
+											"value": "10/04/2026"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Policy",
+									"value": "100;w=900"
+								},
+								{
+									"key": "RateLimit",
+									"value": "limit=100, remaining=99, reset=900"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "92"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5c-tddSV4NTtbR0TI8xxhXjibOAfIg\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Apr 2026 12:54:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"data\": {\n        \"totalIncome\": 5000,\n        \"totalExpense\": 3000,\n        \"netBalance\": 2000\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Category Summary",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/dashboard/category?startDate=2026-04-01&endDate=2026-04-30",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"dashboard",
+								"category"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2026-04-01"
+								},
+								{
+									"key": "endDate",
+									"value": "2026-04-30"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Category Summary",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/dashboard/category?startDate=2026-04-01&endDate=2026-04-30",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"dashboard",
+										"category"
+									],
+									"query": [
+										{
+											"key": "startDate",
+											"value": "2026-04-01"
+										},
+										{
+											"key": "endDate",
+											"value": "2026-04-30"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Policy",
+									"value": "100;w=900"
+								},
+								{
+									"key": "RateLimit",
+									"value": "limit=100, remaining=98, reset=894"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "103"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"67-3IXIV7P3Qa7ro2AG4yK1d0ERXpY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Apr 2026 13:09:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"data\": [\n        {\n            \"total\": 5000,\n            \"category\": \"salary\"\n        },\n        {\n            \"total\": 3000,\n            \"category\": \"rent\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Recent Transactions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/dashboard/recent?limit=5",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"dashboard",
+								"recent"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Recent Transactions",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/dashboard/recent?limit=5",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"dashboard",
+										"recent"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Policy",
+									"value": "100;w=900"
+								},
+								{
+									"key": "RateLimit",
+									"value": "limit=100, remaining=97, reset=841"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "579"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"243-KYlDsaP+8twc30j25Y1Hl6NM0sQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Apr 2026 13:09:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"data\": [\n        {\n            \"_id\": \"69d789c56afa8d2f8ef32894\",\n            \"userId\": \"69d76396e65c3c5105b6d19f\",\n            \"amount\": 5000,\n            \"type\": \"income\",\n            \"category\": \"salary\",\n            \"date\": \"2026-04-09T00:00:00.000Z\",\n            \"note\": \"Monthly salary\",\n            \"isDeleted\": false,\n            \"createdAt\": \"2026-04-09T11:13:09.899Z\",\n            \"updatedAt\": \"2026-04-09T11:13:09.899Z\"\n        },\n        {\n            \"_id\": \"69d78e40b20b88f4a6508360\",\n            \"userId\": \"69d76396e65c3c5105b6d19f\",\n            \"amount\": 3000,\n            \"type\": \"expense\",\n            \"category\": \"rent\",\n            \"date\": \"2026-04-05T00:00:00.000Z\",\n            \"note\": \"Flat rent\",\n            \"isDeleted\": false,\n            \"createdAt\": \"2026-04-09T11:32:16.442Z\",\n            \"updatedAt\": \"2026-04-09T11:32:16.442Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Monthly Trends",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/dashboard/monthly?year=2026",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"dashboard",
+								"monthly"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "2026"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Monthly Trends",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/dashboard/monthly?year=2026",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"dashboard",
+										"monthly"
+									],
+									"query": [
+										{
+											"key": "year",
+											"value": "2026"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Policy",
+									"value": "100;w=900"
+								},
+								{
+									"key": "RateLimit",
+									"value": "limit=100, remaining=96, reset=817"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "118"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"76-sj/B3pJouqHDA9SlNXXOBPX5ezQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Apr 2026 13:10:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"data\": [\n        {\n            \"total\": 5000,\n            \"month\": 4,\n            \"type\": \"income\"\n        },\n        {\n            \"total\": 3000,\n            \"month\": 4,\n            \"type\": \"expense\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBcHBTcSIsInN1YiI6eyJfaWQiOiI2OWQ3NjM5NmU2NWMzYzUxMDViNmQxOWYiLCJuYW1lIjoiQWRtaW4iLCJlbWFpbCI6ImFkbWluQHN5c3RlbS5jb20iLCJwaG9uZU5vIjoiOTk5OTk5OTk5OSIsInJvbGUiOiJhZG1pbiIsInN0YXR1cyI6ImFjdGl2ZSIsInBhc3N3b3JkIjoiJDJiJDEwJEt4UEh3RU5DNVQ0L25CSHZ1Tnc5NWVmZGFhSUhwdmpjaEJZNFNPenRtTnNLdlJIdWNUVVRtIiwibG9naW5Ub2tlbiI6bnVsbCwibG9naW5UaW1lIjpudWxsLCJpc0RlbGV0ZWQiOmZhbHNlLCJjcmVhdGVkQXQiOiIyMDI2LTA0LTA5VDA4OjMwOjE0LjI0M1oiLCJ1cGRhdGVkQXQiOiIyMDI2LTA0LTA5VDA4OjMwOjE0LjI0M1oifSwiaWF0IjoxNzc1NzI2MjQ5NDczLCJleHAiOjE3NzgzMTgyNDk0NzN9.tWqtj6YIsGNC0JTHrGToV6eG45-avkErdl8AWjf66_0",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Finance APIs",
+			"item": [
+				{
+					"name": "Create Finance Record",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amount\": 5000,\n  \"type\": \"income\",\n  \"category\": \"salary\",\n  \"date\": \"2026-04-09\",\n  \"note\": \"Monthly salary\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/finance/create/record",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"finance",
+								"create",
+								"record"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Finance Record",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"amount\": 5000,\n  \"type\": \"income\",\n  \"category\": \"salary\",\n  \"date\": \"2026-04-09\",\n  \"note\": \"Monthly salary\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/finance/create/record",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"finance",
+										"create",
+										"record"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Policy",
+									"value": "100;w=900"
+								},
+								{
+									"key": "RateLimit",
+									"value": "limit=100, remaining=95, reset=764"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "335"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"14f-ZfATmasWQ0HdJFJ1g4sjZTQoGL0\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Apr 2026 13:11:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"message\": \"Record created\",\n    \"data\": {\n        \"userId\": \"69d76396e65c3c5105b6d19f\",\n        \"amount\": 5000,\n        \"type\": \"income\",\n        \"category\": \"salary\",\n        \"date\": \"2026-04-09T00:00:00.000Z\",\n        \"note\": \"Monthly salary\",\n        \"isDeleted\": false,\n        \"_id\": \"69d7a573fd2d12c8f8f1fc2a\",\n        \"createdAt\": \"2026-04-09T13:11:15.329Z\",\n        \"updatedAt\": \"2026-04-09T13:11:15.329Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Finance Records",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/finance/records/all?page=1&limit=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"finance",
+								"records",
+								"all"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Finance Records",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/finance/records/all?page=1&limit=10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"finance",
+										"records",
+										"all"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Policy",
+									"value": "100;w=900"
+								},
+								{
+									"key": "RateLimit",
+									"value": "limit=100, remaining=95, reset=760"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "447"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1bf-ZBwZCHOUgHkSyRSkOaBPstohlx8\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Apr 2026 11:44:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"data\": [\n        {\n            \"_id\": \"69d78e40b20b88f4a6508360\",\n            \"amount\": 3000,\n            \"type\": \"expense\",\n            \"category\": \"rent\",\n            \"date\": \"2026-04-05T00:00:00.000Z\",\n            \"note\": \"Flat rent\",\n            \"createdAt\": \"2026-04-09T11:32:16.442Z\"\n        },\n        {\n            \"_id\": \"69d789c56afa8d2f8ef32894\",\n            \"amount\": 5000,\n            \"type\": \"income\",\n            \"category\": \"salary\",\n            \"date\": \"2026-04-09T00:00:00.000Z\",\n            \"note\": \"Monthly salary\",\n            \"createdAt\": \"2026-04-09T11:13:09.899Z\"\n        }\n    ],\n    \"meta\": {\n        \"total\": 2,\n        \"page\": 1,\n        \"limit\": 10,\n        \"totalPages\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Single Finance",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/finance/record/69d78e40b20b88f4a6508360",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"finance",
+								"record",
+								"69d78e40b20b88f4a6508360"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Single Finance",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/finance/record/69d78e40b20b88f4a6508360",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"finance",
+										"record",
+										"69d78e40b20b88f4a6508360"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Policy",
+									"value": "100;w=900"
+								},
+								{
+									"key": "RateLimit",
+									"value": "limit=100, remaining=93, reset=696"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "302"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"12e-M36YiOMLuF539y8H5p0arc0yaZE\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Apr 2026 13:12:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"data\": {\n        \"_id\": \"69d78e40b20b88f4a6508360\",\n        \"userId\": \"69d76396e65c3c5105b6d19f\",\n        \"amount\": 3000,\n        \"type\": \"expense\",\n        \"category\": \"rent\",\n        \"date\": \"2026-04-05T00:00:00.000Z\",\n        \"note\": \"Flat rent\",\n        \"isDeleted\": false,\n        \"createdAt\": \"2026-04-09T11:32:16.442Z\",\n        \"updatedAt\": \"2026-04-09T11:32:16.442Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Finance",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amount\": 6000,\n  \"category\": \"bonus\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/finance/record/update/69d789fd6afa8d2f8ef32896",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"finance",
+								"record",
+								"update",
+								"69d789fd6afa8d2f8ef32896"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Finance",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"amount\": 6000,\n  \"category\": \"bonus\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/finance/record/update/69d789fd6afa8d2f8ef32896",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"finance",
+										"record",
+										"update",
+										"69d789fd6afa8d2f8ef32896"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Policy",
+									"value": "100;w=900"
+								},
+								{
+									"key": "RateLimit",
+									"value": "limit=100, remaining=97, reset=794"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "334"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"14e-2avP7/jsZnY9LxmlS+VVI+EGOQ0\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Apr 2026 11:44:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"message\": \"Record updated\",\n    \"data\": {\n        \"_id\": \"69d789fd6afa8d2f8ef32896\",\n        \"userId\": \"69d76396e65c3c5105b6d19f\",\n        \"amount\": 6000,\n        \"type\": \"income\",\n        \"category\": \"bonus\",\n        \"date\": \"2026-04-03T00:00:00.000Z\",\n        \"note\": \"Warehouse rent\",\n        \"isDeleted\": false,\n        \"createdAt\": \"2026-04-09T11:14:05.744Z\",\n        \"updatedAt\": \"2026-04-09T11:44:02.044Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Finance",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/finance/record/delete/69d789fd6afa8d2f8ef32896",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"finance",
+								"record",
+								"delete",
+								"69d789fd6afa8d2f8ef32896"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Finance",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/finance/record/delete/69d789fd6afa8d2f8ef32896",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"finance",
+										"record",
+										"delete",
+										"69d789fd6afa8d2f8ef32896"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "RateLimit-Policy",
+									"value": "100;w=900"
+								},
+								{
+									"key": "RateLimit",
+									"value": "limit=100, remaining=96, reset=768"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"35-iQsZOR/+VFBAbr+HwDQgDvq04A8\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Apr 2026 11:44:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"message\": \"Record deleted\"\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBcHBTcSIsInN1YiI6eyJfaWQiOiI2OWQ3NjM5NmU2NWMzYzUxMDViNmQxOWYiLCJuYW1lIjoiQWRtaW4iLCJlbWFpbCI6ImFkbWluQHN5c3RlbS5jb20iLCJwaG9uZU5vIjoiOTk5OTk5OTk5OSIsInJvbGUiOiJhZG1pbiIsInN0YXR1cyI6ImFjdGl2ZSIsInBhc3N3b3JkIjoiJDJiJDEwJEt4UEh3RU5DNVQ0L25CSHZ1Tnc5NWVmZGFhSUhwdmpjaEJZNFNPenRtTnNLdlJIdWNUVVRtIiwibG9naW5Ub2tlbiI6bnVsbCwibG9naW5UaW1lIjpudWxsLCJpc0RlbGV0ZWQiOmZhbHNlLCJjcmVhdGVkQXQiOiIyMDI2LTA0LTA5VDA4OjMwOjE0LjI0M1oiLCJ1cGRhdGVkQXQiOiIyMDI2LTA0LTA5VDA4OjMwOjE0LjI0M1oifSwiaWF0IjoxNzc1NzI2MjQ5NDczLCJleHAiOjE3NzgzMTgyNDk0NzN9.tWqtj6YIsGNC0JTHrGToV6eG45-avkErdl8AWjf66_0",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000"
+		},
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "userId",
+			"value": ""
+		}
+	]
+}
