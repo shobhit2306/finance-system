@@ -100,6 +100,10 @@ npm run dev:nd
 👉 A Postman collection is included for testing all APIs.
 
 Steps:
-Import the Postman collection
-Set the base URL
-Use JWT token for authenticated routes
+## 📡 API Testing
+
+Postman Collection:
+
+🔗 https://raw.githubusercontent.com/shobhit2306/finance-system/359485b237caac6c07e08623d38a621a8b71a326/postman_collection/Finance_system_api_collection
+
+You can import this directly into Postman.
