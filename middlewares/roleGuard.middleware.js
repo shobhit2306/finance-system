@@ -2,13 +2,14 @@ import responseHelper from "../helpers/response.helper.js";
 
 const { send403 } = responseHelper;
 
-const authorize = (roles = []) => {
+const authorize = (...allowedRoles) => {
   return (req, res, next) => {
     try {
-      if (!req.user || !roles.includes(req.user.role)) {
+      
+      if (!req.user || !allowedRoles.includes(req.user.role)) {
         return send403(res, {
           status: false,
-          message: "Access denied",
+          message: `Role '${req.user?.role}' not allowed`,
         });
       }
       next();

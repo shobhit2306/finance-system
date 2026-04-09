@@ -1,5 +1,5 @@
 const APPSQUADZ = {
-  APP_NAME: "LEARNING-SYSTEM",
+  APP_NAME: "FINANCE DATA PROCESSING SYSTEM",
   MESSAGES: {
     CONNECTION_SUCCESS: "Connection to database established",
     CONNECTION_ERR: "Error with database connection",
@@ -9,6 +9,7 @@ const APPSQUADZ = {
     JWT_EXPIRED_ERR: "Unable to verify token. Please generate new token",
     NO_TOKEN_ERR: "No auth token found in header",
     PASS_TOKEN_INVD_ERR: "Please pass token properly with Bearer <token>",
+    INCTV_USER_ERR:"User is inactive",
     VLD_ERR: "Validation errors found",
     NOT_MOD: "Please login with moderator's credential",
     USER_INVD_PWD_ERR:"Invalid credential",
@@ -41,28 +42,29 @@ const APPSQUADZ = {
 
   },
   ROUTES: {
-    ROUTE_SUPER_ADMIN:"/super-admin",
     ROUTE_USER: "/user",
-    ROUTE_ADMIN: "/admin",
-    ROUTE_ORGANIZATION:"/organization",
+    ROUTE_FINANCE:"/finance",
+    ROUTE_DASHBOARD:"/dashboard",
+    FINANCE_ENDPOINTS:{
+CREATE_RECORD:"/create/record",
+ALL_RECORD:"/records/all",
+SINGLE_RECORD:"/record/:id",
+UPDATE_RECORD:"/record/update/:id",
+DELETE_RECORD:"/record/delete/:id"
+},
     USER_ENDPOINTS: {
-      REGISTER: "/signup",
-      AUTH_EMAIL: "/phone/auth",
-      PROFILE: "/profile",
-      COMPLETE_PROFILE:"/complete-profile",
-      USER_ENROLL:"/enroll",
-      USER_WATCH_VID:"/watch-video",
-      USER_QUIZ:"/quiz",
-      USER_SCORE:"/score",
+        LOGIN: "/auth/login",
+        CREATE_USER: "/create",
+        GET_USERS: "/all",
+        UPDATE_USER: "/update/:id",
+        CHANGE_STATUS: "/status/update/:id",
+        DELETE_USER: "/delete/:id",
        },
-       ADMIN_ENDPOINTS: {
-        ADMIN_LOGIN: "/login",
-        CREATE_SESSION:"/session/create",
-        ALL_ORDERS: "/order/all",
-         },
-         SUPER_ADMIN_ENDPOINTS:{
-          SUPER_ADMIN_LOGIN:"/login",
-          CREATE_ADMIN:"/create-admin"
+       DASHBOARD_ENDPOINTS: {
+       DSHBRD_SMMRY:"/summary",
+       DSHBRD_CTGRY:"/category",
+       DSHBRD_RCNT:"/recent",
+       DSHBRD_MNTHLY:"/monthly",
          }
   },
 };

@@ -1,399 +1,333 @@
 import validator from "../configuration/validation.config.js";
 import bcrypt from "bcrypt";
-import helpers from "../helpers/index.helper.js";
 import userService from "../services/user.service.js";
 import responseHelper from "../helpers/response.helper.js";
-import jwtMiddleware from "../middlewares/jwt.middleware.js";
-import registerValidator from "../validators/register.validator.js";
-import authByEmailValidator from "../validators/auth.email.validator.js";
 import APPSQUADZ from "../helpers/message.helper.js";
-import __dirname from "../configuration/dir.config.js";
-import moment from "moment";
-import sessionModel from "../models/session.model.js";
-import enrollmentModel from "../models/enrollment.model.js";
-import videoProgressModel from "../models/videoProgress.model.js";
-import quizModel from "../models/quiz.model.js";
+import helpers from "../helpers/index.helper.js";
+import {
+  loginSchema,
+  createUserSchema,
+  updateUserSchema,
+  statusSchema,
+  getUsersQuerySchema,
+} from "../validators/user.validator.js";
 
-const {
-    generateToken,
-  } = helpers,
-  { validationThrowsError } = validator,
-  { send200, send403, send400, send401, send404,send500 } = responseHelper,
+const { validationThrowsError } = validator,
+  { send200, send400, send500, send401, send403 } = responseHelper,
   {
     createUser,
     retrieveUserByEmail,
     retrieveUserByPhone,
     updateUser,
     retrieveUser,
+retrieveAllUsers
   } = userService,
-  
-  { verifyToken: jwtAuthGuard } = jwtMiddleware,
-  {
-    MESSAGES: {
-      VLD_ERR,
-      USER_REG_SUCCESS,
-      USER_NOT_FOUND_ERR,
-      LOGIN_SUCCESS,
-      NUMBER_ALR_RGSTD,
-      USER_INVD_PWD_ERR,
-      USER_PROFILE,
-    }
-  } = APPSQUADZ
+  { generateToken } = helpers;
 
-const register = [
-  registerValidator.name,
-  registerValidator.phoneNo,
-  registerValidator.email,
-  registerValidator.password,
 
-  async (req, res) => {
-    const errors = validationThrowsError(req);
 
-    if (errors.length) {
+
+const loginUser = async (req, res) => {
+  try {
+    // const { email, password } = req.body;
+const { error, value } = loginSchema.validate(req.body);
+
+    if (error) {
       return send400(res, {
         status: false,
-        message: VLD_ERR,
-        data: errors,
+        message: error.details[0].message,
       });
     }
 
-    const { password, email, phoneNo } = req.body;
+    const { email, password } = value;
 
-    // Check existing email
-    const existingEmail = await retrieveUserByEmail(email);
-    if (existingEmail) {
+    const user = await retrieveUserByEmail(email);
+
+    if (!user || user.isDeleted) {
+      return send401(res, {
+        status: false,
+        message: "Invalid credentials",
+      });
+    }
+
+    // 3. Check status
+    if (user.status !== "active") {
       return send403(res, {
         status: false,
-        message: "Email already registered",
+        message: "User is inactive",
       });
     }
 
-    // Check existing phone
-    const existingPhone = await retrieveUserByPhone(phoneNo);
-    if (existingPhone) {
-      return send403(res, {
+    // 4. Compare password
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return send401(res, {
         status: false,
-        message: "Phone already registered",
+        message: "Invalid credentials",
       });
     }
 
-    // Create user
-    const userObj = {
-      name: req.body.name,
-      email,
-      phoneNo,
-      role: "USER", // ✅ enforce role
-      password: await bcrypt.hash(password, 10),
-    };
+    // 5. Generate token
+    const token = generateToken(user);
 
-    const created = await createUser(userObj);
-
-    const token = generateToken(created);
-
-    const user = await updateUser(
-      { _id: created._id },
+    // 6. Save login info
+    await updateUser(
+      { _id: user._id },
       {
         loginToken: token,
-        loginTime: moment().utc().toDate(),
+        loginTime: new Date(),
       }
     );
 
-    // Remove sensitive fields
     user.password = undefined;
 
     return send200(res, {
       status: true,
-      message: USER_REG_SUCCESS,
+      message: "Login successful",
+      data: {
+        user,
+        token,
+      },
+    });
+  } catch (error) {
+    return send500(res, { message: error.message });
+  }
+};
+
+
+const createNewUser = async (req, res) => {
+  try {
+const { error, value } = createUserSchema.validate(req.body);
+
+if (error) {
+  return send400(res, {
+    status: false,
+    message: error.details[0].message,
+  });
+}
+
+const { name, email, phoneNo, password, role } = value;
+    const existingEmail = await retrieveUserByEmail(email);
+    if (existingEmail) {
+      return send403(res, { message: "Email already exists" });
+    }
+
+    const existingPhone = await retrieveUserByPhone(phoneNo);
+    if (existingPhone) {
+      return send403(res, { message: "Phone already exists" });
+    }
+
+    const hashedPassword = password
+      ? await bcrypt.hash(password, 10)
+      : null;
+
+    const user = await createUser({
+      name,
+      email,
+      phoneNo,
+      password: hashedPassword,
+      role: role || "viewer",
+      status: "active",
+    });
+
+    user.password = undefined;
+
+    return send200(res, {
+      status: true,
+      message: "User created successfully",
       data: user,
     });
-  },
-],
-  authByEmail = [
-    authByEmailValidator.email,
-    authByEmailValidator.password,
-  
-    async (req, res) => {
-      const errors = validationThrowsError(req);
-      if (errors.length)
-        send400(res, { status: false, message: VLD_ERR, data: errors });
-      else {
-        const {
-          body: { email, password }
-        } = req;
+  } catch (error) {
+    return send500(res, { message: error.message });
+  }
+};
 
-        let user = null;
-        const existingUser = await retrieveUserByEmail(email);
 
-        if (!existingUser) {
-          send404(res, {
-            status: false,
-            message: "Error",
-            data: [{ msg: USER_NOT_FOUND_ERR }],
-          });
-        } else {
-          const {
-            password: existingPassword,
-            _id: existingUserId
-          } = existingUser;
-
-              if (!(await bcrypt.compare(password, existingPassword)))
-                send401(res, {
-                  status: false,
-                  message: "Error",
-                  data: [{ msg: USER_INVD_PWD_ERR }],
-                });
-              else {
-                  user = await updateUser(
-                    { _id: existingUserId },
-                    {
-                      loginToken: generateToken(existingUser),
-                      loginTime: moment().utc().toDate(),
-                    }
-                  );
-                  user.password = undefined;
-                  send200(res, {
-                    status: true,
-                    message: LOGIN_SUCCESS,
-                    data: user,
-                  }); 
-              }
-        }
-      }
-    },
-  ],
-  profile = [
-    jwtAuthGuard,
-    async (req, res) => {
-      const {
-          user: { _id },
-        } = req,
-        profile = await retrieveUser({ _id });
-      profile.loginToken = profile.password = undefined;
-      send200(res, { status: true, message: USER_PROFILE, data: profile });
-    },
-  ],
- completeProfile = async (req, res) => {
+const getUsers = async (req, res) => {
   try {
-    const userId = req.user._id;
 
-    // 1. Check active session
-    const activeSession = await sessionModel.findOne({ isActive: true });
+    const { error, value } = getUsersQuerySchema.validate(req.query);
 
-    if (!activeSession) {
-      return send403(res, {
-        status: false,
-        message: "No active session available. Cannot complete profile.",
-      });
+if (error) {
+  return send400(res, {
+    status: false,
+    message: error.details[0].message,
+  });
+}
+    const {
+      page = 1,
+      limit = 10,
+      search,
+      role,
+      status,
+      startDate,
+      endDate,
+      sortBy = "createdAt",
+      order = "desc",
+    } = value;
+
+    const query = { isDeleted: false };
+    const userRole = req.user.role;
+
+    let allowedRoles = [];
+
+    if (userRole === "admin") {
+      allowedRoles = ["admin", "analyst", "viewer"];
+    } else if (userRole === "analyst") {
+      allowedRoles = ["analyst", "viewer"];
+    } else if (userRole === "viewer") {
+      allowedRoles = ["viewer"];
     }
 
-    // 2. Update user profile
-    const updatedUser = await updateUser(
-      { _id: userId },
-      {
-        ...req.body,
-        isProfileComplete: true,
-      }
+    if (role) {
+      const requestedRoles = role.split(",");
+
+      query.role = {
+        $in: requestedRoles.filter((r) =>
+          allowedRoles.includes(r)
+        ),
+      };
+    } else {
+      query.role = { $in: allowedRoles };
+    }
+
+    if (search) {
+      query.$or = [
+        { name: { $regex: search, $options: "i" } },
+        { email: { $regex: search, $options: "i" } },
+      ];
+    }
+
+    if (status) {
+      query.status = status;
+    }
+    if (startDate || endDate) {
+      query.createdAt = {};
+      if (startDate) query.createdAt.$gte = new Date(startDate);
+      if (endDate) query.createdAt.$lte = new Date(endDate);
+    }
+
+    const sort = {
+      [sortBy]: order === "asc" ? 1 : -1,
+    };
+    const parsedLimit = Number(limit);
+    const parsedPage = Number(page);
+    const offset = (parsedPage - 1) * parsedLimit;
+
+    const users = await retrieveAllUsers(
+      query,
+      sort,
+      parsedLimit,
+      offset,
+      "name email phoneNo role status createdAt"
     );
 
-    // Remove sensitive fields
-    updatedUser.password = undefined;
-
     return send200(res, {
       status: true,
-      message: "Profile completed successfully",
-      data: updatedUser,
+      data: users.docs,
+      meta: {
+        total: users.totalDocs,
+        page: users.page,
+        limit: users.limit,
+        totalPages: users.totalPages,
+      },
     });
-
   } catch (error) {
-    return send500(res, { message: error.message });
+    return send500(res, {
+      status: false,
+      message: error.message,
+    });
   }
-},
- enrollUser = async (req, res) => {
+};
+
+
+const updateUserById = async (req, res) => {
   try {
-    const userId = req.user._id;
 
-    // 1. Check active session
-    const activeSession = await sessionModel.findOne({ isActive: true });
+    const { error, value } = updateUserSchema.validate(req.body);
 
-    if (!activeSession) {
-      return send403(res, {
-        status: false,
-        message: "No active session available",
-      });
-    }
-
-    // 2. Check already enrolled
-    const existing = await enrollmentModel.findOne({
-      userId,
-      sessionId: activeSession._id,
-    });
-
-    if (existing) {
-      return send403(res, {
-        status: false,
-        message: "User already enrolled in this session",
-      });
-    }
-
-    // 3. Create enrollment (mock payment success)
-    const enrollment = await enrollmentModel.create({
-      userId,
-      sessionId: activeSession._id,
-      paymentStatus: "PAID",
-      amount: activeSession.price,
-    });
-
-    return send200(res, {
-      status: true,
-      message: "Enrollment successful",
-      data: enrollment,
-    });
-
-  } catch (error) {
-    return send500(res, { message: error.message });
-  }
-},
-watchVideo = async (req, res) => {
-  try {
-    const userId = req.user._id;
-
-    // 1. Active session
-    const session = await sessionModel.findOne({ isActive: true });
-
-    if (!session) {
-      return send403(res, { message: "No active session" });
-    }
-
-    const now = new Date();
-if (session.endDate < now) {
-  return send403(res, {
-    message: "Session expired",
-  });
-}
-    // 2. Enrollment check
-    const enrolled = await enrollmentModel.findOne({
-      userId,
-      sessionId: session._id,
-    });
-
-    if (!enrolled) {
-      return send403(res, { message: "User not enrolled" });
-    }
-
-    // 3. Daily limit check
-    const today = new Date().toISOString().split("T")[0];
-
-    const alreadyWatched = await videoProgressModel.findOne({
-      userId,
-      sessionId: session._id,
-      date: today,
-    });
-
-    if (alreadyWatched) {
-      return send403(res, {
-        message: "Daily video already watched",
-      });
-    }
-
-    // 4. Mark watched
-    const progress = await videoProgressModel.create({
-      userId,
-      sessionId: session._id,
-      date: today,
-    });
-
-    return send200(res, {
-      status: true,
-      message: "Video watched successfully",
-      data: progress,
-    });
-
-  } catch (error) {
-    return send500(res, { message: error.message });
-  }
-},
-attemptQuiz = async (req, res) => {
-  try {
-    const userId = req.user._id;
-    const { score } = req.body;
-
-    const session = await sessionModel.findOne({ isActive: true });
-
-    if (!session) {
-      return send403(res, { message: "No active session" });
-    }
-
-const now = new Date();
-if (session.endDate < now) {
-  return send403(res, {
-    message: "Session expired",
+if (error) {
+  return send400(res, {
+    status: false,
+    message: error.details[0].message,
   });
 }
 
-    const enrolled = await enrollmentModel.findOne({
-      userId,
-      sessionId: session._id,
-    });
+const updates = value;
 
-    if (!enrolled) {
-      return send403(res, { message: "User not enrolled" });
+    if (updates.password) {
+      updates.password = await bcrypt.hash(updates.password, 10);
     }
 
-    const today = new Date().toISOString().split("T")[0];
-
-    const alreadyAttempted = await quizModel.findOne({
-      userId,
-      sessionId: session._id,
-      date: today,
-    });
-
-    if (alreadyAttempted) {
-      return send403(res, {
-        message: "Quiz already attempted today",
-      });
-    }
-
-    const attempt = await quizModel.create({
-      userId,
-      sessionId: session._id,
-      date: today,
-      score,
-    });
+    const user = await updateUser(
+      { _id: req.params.id, isDeleted: false },
+      updates
+    );
 
     return send200(res, {
       status: true,
-      message: "Quiz submitted successfully",
-      data: attempt,
+      message: "User updated",
+      data: user,
     });
-
   } catch (error) {
     return send500(res, { message: error.message });
   }
-},
- getScores = async (req, res) => {
+};
+
+
+const changeUserStatus = async (req, res) => {
   try {
-    const userId = req.user._id;
+const { error, value } = statusSchema.validate(req.body);
 
-    const attempts = await quizModel.find({ userId });
+if (error) {
+  return send400(res, {
+    status: false,
+    message: error.details[0].message,
+  });
+}
+
+const { status } = value;
+
+    const user = await updateUser(
+      { _id: req.params.id },
+      { status }
+    );
 
     return send200(res, {
       status: true,
-      data: attempts,
+      message: `User ${status}`,
+      data: user,
     });
-
   } catch (error) {
     return send500(res, { message: error.message });
   }
-},
-  userDomain = {
-    register,
-    authByEmail,
-    profile,
-    completeProfile,
-    enrollUser,
-    watchVideo,
-    attemptQuiz,
-    getScores
-  };
+};
+
+
+const deleteUser = async (req, res) => {
+  try {
+    await updateUser(
+      { _id: req.params.id },
+      { isDeleted: true }
+    );
+
+    return send200(res, {
+      status: true,
+      message: "User deleted",
+    });
+  } catch (error) {
+    return send500(res, { message: error.message });
+  }
+};
+
+const userDomain = {
+  loginUser,
+  createNewUser,
+  getUsers,
+  updateUserById,
+  changeUserStatus,
+  deleteUser,
+};
 
 export default userDomain;

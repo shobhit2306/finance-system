@@ -12,6 +12,7 @@ const {
   deleteOne,
   modUpsertOne,
   deleteMany,
+  retrieveManyWithPagination
 } = commonHelper;
 
 const createUser = async (data) => {
@@ -38,6 +39,16 @@ const createUser = async (data) => {
   retrieveUser = async (filter) => {
     return await retrieveOne(userModel, { ...filter });
   },
+  retrieveAllUsers = async (filter, sort, limit, offset, select) => {
+      return await retrieveManyWithPagination(
+        userModel,
+        { ...filter },
+        { ...sort },
+        limit,
+        offset,
+        select
+      );
+    },
   updateUser = async (filter, data) => {
     return await updateOne(userModel, { ...filter }, { ...data });
   },
@@ -62,7 +73,8 @@ const createUser = async (data) => {
     deleteUserById,
     deleteMultipleUsers,
     suspendMultipleUsers,
-    retrieveUserByPhone
+    retrieveUserByPhone,
+    retrieveAllUsers
   };
 
 export default userService;

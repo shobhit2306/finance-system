@@ -2,15 +2,14 @@ import express, { json, urlencoded, static as expressStatic } from "express";
 import limiter from "./configuration/ratelimit.config.js";
 import cors from "cors";
 import userRouter from "./routes/user.route.js";
-import adminRouter from "./routes/admin.route.js";
 import connection from "./configuration/database.config.js";
 import APPSQUADZ from "./helpers/message.helper.js";
 import { createServer } from "http";
 import defaultConfig from "./configuration/app.config.js";
 import __dirname from "./configuration/dir.config.js";
 import { join } from "path";
-import superAdminRouter from "./routes/super.admin.route.js";
-import organizationRouter from "./routes/organisation.route.js";
+import financeRouter from "./routes/finance.route.js";
+import dashboardRouter from "./routes/dashboard.route.js";
 
 const app = express(),
   attachCoreMiddlewares = async () => {
@@ -23,10 +22,9 @@ const app = express(),
     app.use(cors());
   },
   attachRouters = async () => {
-        app.use(APPSQUADZ.ROUTES.ROUTE_SUPER_ADMIN, superAdminRouter);
     app.use(APPSQUADZ.ROUTES.ROUTE_USER, userRouter);
-    app.use(APPSQUADZ.ROUTES.ROUTE_ADMIN, adminRouter);
-    app.use(APPSQUADZ.ROUTES.ROUTE_ORGANIZATION,organizationRouter)
+    app.use(APPSQUADZ.ROUTES.ROUTE_FINANCE,financeRouter);
+    app.use(APPSQUADZ.ROUTES.ROUTE_DASHBOARD,dashboardRouter);
   },
   upServer = async () => {
     if (connection.readyState == 1) {

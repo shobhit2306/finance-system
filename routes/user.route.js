@@ -6,36 +6,62 @@ import roleGuardMiddleware from "../middlewares/roleGuard.middleware.js";
 
 const userRouter = Router(),
   {
-register,
-    authByEmail,
-    profile,
-    completeProfile,
-    enrollUser,
-    watchVideo,
-    attemptQuiz,
-    getScores
+    loginUser,
+    createNewUser,
+    getUsers,
+    updateUserById,
+    changeUserStatus,
+    deleteUser,
   } = userDomain,
   {
     ROUTES: {
       USER_ENDPOINTS: {
-        REGISTER,
-        AUTH_EMAIL,
-        PROFILE,
-        COMPLETE_PROFILE,
-        USER_ENROLL,
-        USER_WATCH_VID,
-        USER_QUIZ,
-        USER_SCORE
+        LOGIN,
+        CREATE_USER,
+        GET_USERS,
+        UPDATE_USER,
+        CHANGE_STATUS,
+        DELETE_USER,
       },
     },
   } = APPSQUADZ;
 
-userRouter.post(REGISTER, register);
-userRouter.post(AUTH_EMAIL, authByEmail);
-userRouter.get(PROFILE, profile);
-userRouter.post( COMPLETE_PROFILE,jwtMiddleware.verifyToken,roleGuardMiddleware.authorize(["USER"]),completeProfile);
-userRouter.post(USER_ENROLL,jwtMiddleware.verifyToken,roleGuardMiddleware.authorize(["USER"]),enrollUser);
-userRouter.post(USER_WATCH_VID, jwtMiddleware.verifyToken, roleGuardMiddleware.authorize(["USER"]), watchVideo);
-userRouter.post(USER_QUIZ, jwtMiddleware.verifyToken, roleGuardMiddleware.authorize(["USER"]), attemptQuiz);
-userRouter.get(USER_SCORE, jwtMiddleware.verifyToken, roleGuardMiddleware.authorize(["USER"]), getScores);
+
+userRouter.post(LOGIN, loginUser);
+
+userRouter.post(
+  CREATE_USER,
+  jwtMiddleware.verifyToken,
+  roleGuardMiddleware.authorize("admin"),
+  createNewUser
+);
+
+userRouter.get(
+  GET_USERS,
+  jwtMiddleware.verifyToken,
+  roleGuardMiddleware.authorize("admin", "analyst"),
+  getUsers
+);
+
+userRouter.put(
+  UPDATE_USER,
+  jwtMiddleware.verifyToken,
+  roleGuardMiddleware.authorize("admin"),
+  updateUserById
+);
+
+userRouter.patch(
+  CHANGE_STATUS,
+  jwtMiddleware.verifyToken,
+  roleGuardMiddleware.authorize("admin"),
+  changeUserStatus
+);
+
+userRouter.delete(
+  DELETE_USER,
+  jwtMiddleware.verifyToken,
+  roleGuardMiddleware.authorize("admin"),
+  deleteUser
+);
+
 export default userRouter;
